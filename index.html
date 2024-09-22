@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LP Tool</title>
+
+  <!-- bootstrap -->
+  <link rel="stylesheet" href="./assets/bootstrap/bootstrap.min.css">
+  <script defer src="./assets/bootstrap/bootstrap.bundle.min.js"></script>
+
+  <!-- fontawesome icons -->
+  <link rel="stylesheet" href="./assets/icons/all.min.css">
+  <script defer src="./assets/icons/all.min.js"></script>
+
+  <!-- css -->
+  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./src/css/ui.css">
+
+  <!-- jquery -->
+  <!-- <script defer src="./assets/jquery/jquery.js"></script> -->
+
+  <!-- Quill Editor -->
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.0-rc.2/dist/quill.snow.css" rel="stylesheet" />
+  <script defer src="https://cdn.jsdelivr.net/npm/quill@2.0.0-rc.2/dist/quill.js"></script>
+
+
+  <!-- script -->
+  <script type="module" src="./main.js"></script>
+
+  <style id="lp-css-code"></style>
+
+</head>
+
+<body>
+  <header class="header">
+    <img class="logo" src="./assets/images/selling-simplified-logo.svg" alt="Selling Simplified">
+  </header>
+  <section class="section">
+    <aside class="aside">
+      <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+          <button class="nav-link active rounded-0" id="nav-add-tab" data-bs-toggle="tab" data-bs-target="#nav-add" type="button" role="tab" aria-controls="nav-add" aria-selected="true">Add</button>
+          <button class="nav-link rounded-0" id="nav-content-tab" data-bs-toggle="tab" data-bs-target="#nav-content" type="button" role="tab" aria-controls="nav-content" aria-selected="false">Content</button>
+          <button class="nav-link rounded-0" id="nav-css-tab" data-bs-toggle="tab" data-bs-target="#nav-css" type="button" role="tab" aria-controls="nav-css" aria-selected="false">CSS</button>
+        </div>
+      </nav>
+      <div class="tab-content" id="nav-tabContent">
+        <!-- Add Tab -->
+        <div class="tab-pane fade show active" id="nav-add" role="tabpanel" aria-labelledby="nav-add-tab" tabindex="0">
+          <div class="row g-2 p-3">
+            <div class="col-4">
+              <button class="add-item draggable" draggable="true" data-type="image">
+                <i class="fa-regular fa-image"></i>
+                <span>Image</span>
+              </button>
+            </div>
+            <div class="col-4">
+              <button class="add-item draggable" draggable="true" data-type="text">
+                <i class="fa-solid fa-paragraph"></i>
+                <span>Text</span>
+              </button>
+            </div>
+            <div class="col-4">
+              <button class="add-item draggable" draggable="true" data-type="bullet">
+                <i class="fa-solid fa-list-ul"></i>
+                <span>Bullet</span>
+              </button>
+            </div>
+            <div class="col-4">
+              <button class="add-item draggable" draggable="true" data-type="cta">
+                <i class="fa-regular fa-square"></i>
+                <span>CTA</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- Content Tab -->
+        <div class="tab-pane fade" id="nav-content" role="tabpanel" aria-labelledby="nav-content-tab" tabindex="0">
+          <!-- Image Editor -->
+          <div class="editor image-editor">
+            <div class="p-3 border-bottom">
+              <img id="image-demo" class="img-fluid" src="http://visionayrsolutions.com/sstcp/ss_at/at/HPE-Insight-Banner.jpg" alt="VMRay" />
+            </div>
+            <div class="p-3 pt-2 border-bottom">
+              <label class="form-label mb-1 small">Image url</label>
+              <input type="text" id="image-url" class="form-control form-control-sm" />
+            </div>
+            <div class="p-3 pt-2 border-bottom">
+              <label class="form-label mb-1 small">Image alt text</label>
+              <input type="text" id="image-alt-text" class="form-control form-control-sm" />
+            </div>
+            <div class="p-3 pt-2 border-bottom">
+              <label class="form-label mb-1 small">Width (in %)</label>
+              <input type="number" id="image-width" class="form-control form-control-sm" min="1" />
+            </div>
+            <div class="p-3 pt-2 border-bottom">
+              <label class="form-label mb-1 small d-inline-block me-3">Alignment</label>
+              <div class="btn-group btn-group-sm">
+                <button type="button" id="image-align-left" class="btn btn-outline-secondary">Left</button>
+                <button type="button" id="image-align-center" class="btn btn-outline-secondary">Center</button>
+                <button type="button" id="image-align-right" class="btn btn-outline-secondary">Right</button>
+              </div>
+            </div>
+
+            <div class="p-3 pt-2 border-bottom">
+              <label class="form-label mb-1 small">Padding</label>
+              <div class="row g-1">
+                <div class="col">
+                  <label class="form-label mb-1 small">Top</label>
+                  <input type="number" id="image-pt" class="form-control form-control-sm" min="1" />
+                </div>
+                <div class="col">
+                  <label class="form-label mb-1 small">Right</label>
+                  <input type="number" id="image-pr" class="form-control form-control-sm" min="1" />
+                </div>
+                <div class="col">
+                  <label class="form-label mb-1 small">Bottom</label>
+                  <input type="number" id="image-pb" class="form-control form-control-sm" min="1" />
+                </div>
+                <div class="col">
+                  <label class="form-label mb-1 small">Left</label>
+                  <input type="number" id="image-pl" class="form-control form-control-sm" min="1" />
+                </div>
+              </div>
+            </div>
+            <div class="p-3 pt-2 border-bottom">
+              <label class="form-label mb-1 small">Select image css</label>
+              <select class="form-select form-select-sm" id="select-image-css">
+                <option selected value="-1">Select type</option>
+                <option value="1">Image</option>
+                <option value="2">Text</option>
+                <option value="3">Bullet</option>
+                <option value="4">CTA</option>
+              </select>
+            </div>
+          </div>
+          <!-- Text Editor -->
+          <div class="editor text-editor">
+            <div class="p-3 pt-2 border-bottom">
+              <label class="form-label mb-1 small">Text color</label>
+              <input type="color" id="text-color" class="form-control form-control-sm d-block" />
+            </div>
+            
+            <div class="p-3 pt-2 border-bottom">
+              <label class="form-label mb-1 small d-inline-block me-3">Text alignment</label>
+              <div class="btn-group btn-group-sm">
+                <button type="button" id="text-align-left" class="btn btn-outline-secondary">Left</button>
+                <button type="button" id="text-align-center" class="btn btn-outline-secondary">Center</button>
+                <button type="button" id="text-align-right" class="btn btn-outline-secondary">Right</button>
+              </div>
+            </div>
+
+            <div class="p-3 pt-2 border-bottom">
+              <label class="form-label mb-1 small">Font size</label>
+              <input type="number" id="text-font-size" class="form-control form-control-sm" min="1" />
+            </div>
+
+            <div class="p-3 pt-2 border-bottom">
+              <label class="form-label mb-1 small">Line height</label>
+              <input type="number" id="text-line-height" class="form-control form-control-sm" min="1" />
+            </div>
+
+            <div class="p-3 pt-2">
+              <label class="form-label mb-1 small">Padding</label>
+              <div class="row g-1">
+                <div class="col">
+                  <label class="form-label mb-1 small">Top</label>
+                  <input type="number" id="text-pt" class="form-control form-control-sm"  min="1" />
+                </div>
+                <div class="col">
+                  <label class="form-label mb-1 small">Right</label>
+                  <input type="number" id="text-pr" class="form-control form-control-sm" min="1" />
+                </div>
+                <div class="col">
+                  <label class="form-label mb-1 small">Bottom</label>
+                  <input type="number" id="text-pb" class="form-control form-control-sm" min="1" />
+                </div>
+                <div class="col">
+                  <label class="form-label mb-1 small">Left</label>
+                  <input type="number" id="text-pl" class="form-control form-control-sm" min="1" />
+                </div>
+              </div>
+            </div>
+            <div class="p-3 pt-2 border-bottom">
+              <label class="form-label mb-1 small">Select text css</label>
+              <select class="form-select form-select-sm" id="select-text-css">
+                <option selected value="-1">Select type</option>
+                <option value="1">Image</option>
+                <option value="2">Text</option>
+                <option value="3">Bullet</option>
+                <option value="4">CTA</option>
+              </select>
+            </div>
+          </div>
+          <!-- Bullet Editor -->
+          <div class="editor bullet-editor">
+            <!-- Edit Bullet Point -->
+            <p class=" fw-bold p-3 border-bottom small">Edit Bullet Point</p>
+            <div class="p-3 pt-2 border-bottom">
+              <label class="form-label mb-1 small">Bullet point color</label>
+              <input type="color" id="bullet-point-color" class="form-control form-control-sm d-block" />
+            </div>
+            
+            <div class="p-3 pt-2 border-bottom">
+              <label class="form-label mb-1 small d-inline-block me-3">Bullet alignment</label>
+              <div class="btn-group btn-group-sm">
+                <button type="button" id="bullet-point-align-left" class="btn btn-outline-secondary">Left</button>
+                <button type="button" id="bullet-point-align-center" class="btn btn-outline-secondary">Center</button>
+                <button type="button" id="bullet-point-align-right" class="btn btn-outline-secondary">Right</button>
+              </div>
+            </div>
+
+            <div class="p-3 pt-2 border-bottom">
+              <label class="form-label mb-1 small">Font size</label>
+              <input type="number" id="bullet-point-font-size" class="form-control form-control-sm" min="1" />
+            </div>
+
+            <div class="p-3 pt-2 border-bottom">
+              <label class="form-label mb-1 small">Bullet point line height</label>
+              <input type="number" id="bullet-point-line-height" class="form-control form-control-sm" min="1" />
+            </div>
+
+            <div class="p-3 pt-2 border-bottom">
+              <label class="form-label mb-1 small">Bullet point padding</label>
+              <div class="row g-1">
+                <div class="col">
+                  <label class="form-label mb-1 small">Top</label>
+                  <input type="number" id="bullet-point-pt" class="form-control form-control-sm"  min="1" />
+                </div>
+                <div class="col">
+                  <label class="form-label mb-1 small">Right</label>
+                  <input type="number" id="bullet-point-pr" class="form-control form-control-sm" min="1" />
+                </div>
+                <div class="col">
+                  <label class="form-label mb-1 small">Bottom</label>
+                  <input type="number" id="bullet-point-pb" class="form-control form-control-sm" min="1" />
+                </div>
+                <div class="col">
+                  <label class="form-label mb-1 small">Left</label>
+                  <input type="number" id="bullet-point-pl" class="form-control form-control-sm" min="1" />
+                </div>
+              </div>
+            </div>
+            <!-- Edit Bullet Text -->
+            <p class=" fw-bold p-3 border-bottom small">Edit Bullet Text</p>
+            <div class="p-3 pt-2 border-bottom">
+              <label class="form-label mb-1 small">Bullet text color</label>
+              <input type="color" id="bullet-text-color" class="form-control form-control-sm d-block" />
+            </div>
+            
+            <div class="p-3 pt-2 border-bottom">
+              <label class="form-label mb-1 small d-inline-block me-3">Text alignment</label>
+              <div class="btn-group btn-group-sm">
+                <button type="button" id="bullet-text-align-left" class="btn btn-outline-secondary">Left</button>
+                <button type="button" id="bullet-text-align-center" class="btn btn-outline-secondary">Center</button>
+                <button type="button" id="bullet-text-align-right" class="btn btn-outline-secondary">Right</button>
+              </div>
+            </div>
+
+            <div class="p-3 pt-2 border-bottom">
+              <label class="form-label mb-1 small">Font size</label>
+              <input type="number" id="bullet-text-font-size" class="form-control form-control-sm" min="1" />
+            </div>
+
+            <div class="p-3 pt-2 border-bottom">
+              <label class="form-label mb-1 small">Bullet text line height</label>
+              <input type="number" id="bullet-text-line-height" class="form-control form-control-sm" min="1" />
+            </div>
+
+            <div class="p-3 pt-2 border-bottom">
+              <label class="form-label mb-1 small">Bullet text padding</label>
+              <div class="row g-1">
+                <div class="col">
+                  <label class="form-label mb-1 small">Top</label>
+                  <input type="number" id="bullet-text-pt" class="form-control form-control-sm"  min="1" />
+                </div>
+                <div class="col">
+                  <label class="form-label mb-1 small">Right</label>
+                  <input type="number" id="bullet-text-pr" class="form-control form-control-sm" min="1" />
+                </div>
+                <div class="col">
+                  <label class="form-label mb-1 small">Bottom</label>
+                  <input type="number" id="bullet-text-pb" class="form-control form-control-sm" min="1" />
+                </div>
+                <div class="col">
+                  <label class="form-label mb-1 small">Left</label>
+                  <input type="number" id="bullet-text-pl" class="form-control form-control-sm" min="1" />
+                </div>
+              </div>
+            </div>
+            <div class="p-3 pt-2 border-bottom">
+              <label class="form-label mb-1 small">Select bullet css</label>
+              <select class="form-select form-select-sm" id="select-bullet-css">
+                <option selected value="-1">Select type</option>
+                <option value="1">Image</option>
+                <option value="2">Text</option>
+                <option value="3">Bullet</option>
+                <option value="4">CTA</option>
+              </select>
+            </div>
+          </div>
+          <!-- CTA Editor -->
+          <div class="editor cta-editor">
+            <!-- <div class="p-3 pt-2 border-bottom">
+              <label class="form-label mb-1 small">Link</label>
+              <input type="text" id="cta-url" class="form-control form-control-sm" />
+            </div> -->
+            <div class="p-3 pt-2 border-bottom">
+              <label class="form-label mb-1 small">CTA Label</label>
+              <input type="text" id="cta-text" class="form-control form-control-sm" />
+            </div>
+            <div class="p-3 pt-2 border-bottom">
+              <label class="form-label mb-1 small">Font size (in px)</label>
+              <input type="number" id="cta-font-size" class="form-control form-control-sm" min="1" />
+            </div>
+            <div class="p-3 pt-2 border-bottom">
+              <label class="form-label mb-1 small">Text color</label>
+              <input type="color" id="cta-text-color" class="form-control form-control-sm d-block" />
+            </div>
+            <div class="p-3 pt-2 border-bottom">
+              <label class="form-label mb-1 small">Background color</label>
+              <input type="color" id="cta-background-color" class="form-control form-control-sm d-block" />
+            </div>
+            <div class="p-3 pt-2 border-bottom">
+              <label class="form-label mb-1 small">Width (in px)</label>
+              <input type="number" id="cta-width" class="form-control form-control-sm" min="1" />
+            </div>
+            <div class="p-3 pt-2 border-bottom">
+              <label class="form-label mb-1 small">Height (in px)</label>
+              <input type="number" id="cta-height" class="form-control form-control-sm" min="1" />
+            </div>
+            <div class="p-3 pt-2 border-bottom">
+              <label class="form-label mb-1 small">Border radius (in px)</label>
+              <input type="number" id="cta-border-radius" class="form-control form-control-sm" min="1" />
+            </div>
+            <div class="p-3 pt-2 border-bottom">
+              <label class="form-label mb-1 small d-inline-block me-3">Alignment</label>
+              <div class="btn-group btn-group-sm">
+                <button type="button" id="cta-align-left" class="btn btn-outline-secondary">Left</button>
+                <button type="button" id="cta-align-center" class="btn btn-outline-secondary">Center</button>
+                <button type="button" id="cta-align-right" class="btn btn-outline-secondary">Right</button>
+              </div>
+            </div>
+
+            <div class="p-3 pt-2 border-bottom">
+              <label class="form-label mb-1 small">Padding</label>
+              <div class="row g-1">
+                <div class="col">
+                  <label class="form-label mb-1 small">Top</label>
+                  <input type="number" id="cta-pt" class="form-control form-control-sm" min="1" />
+                </div>
+                <div class="col">
+                  <label class="form-label mb-1 small">Right</label>
+                  <input type="number" id="cta-pr" class="form-control form-control-sm" min="1" />
+                </div>
+                <div class="col">
+                  <label class="form-label mb-1 small">Bottom</label>
+                  <input type="number" id="cta-pb" class="form-control form-control-sm" min="1" />
+                </div>
+                <div class="col">
+                  <label class="form-label mb-1 small">Left</label>
+                  <input type="number" id="cta-pl" class="form-control form-control-sm" min="1" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- CSS Tab -->
+        <div class="tab-pane fade" id="nav-css" role="tabpanel" aria-labelledby="nav-css-tab" tabindex="0">
+          <!-- CSS editor code goes here -->
+          <div class="p-3">
+            <div class="mb-2">
+              <label class="form-label mb-0">
+                <small>Select CSS</small>
+              </label>
+              <select class="form-select form-select-sm" id="custom-css-select">
+                <option selected value="-1">Select Custom CSS</option>
+                <!-- <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option> -->
+              </select>
+            </div>
+            <div class="mb-2">
+              <label class="form-label mb-0">
+                <small>Class Name</small>
+              </label>
+              <input class="form-control form-control-sm" id="custom-css-classname" type="text" placeholder="Class name">
+            </div>
+            <div class="mb-2">
+              <label class="form-label mb-0">
+                <small>CSS Code</small>
+              </label>
+              <textarea class="form-control form-control-sm" id="custom-css-code" rows="7"></textarea>
+            </div>
+            <div class="mb-2">
+              <label class="form-label mb-0">
+                <small>Select CSS Type</small>
+              </label>
+              <select class="form-select form-select-sm" id="custom-css-type">
+                <option selected value="-1">Select type</option>
+                <option value="image">Image</option>
+                <option value="text">Text</option>
+                <option value="bullet">Bullet</option>
+                <option value="cta">CTA</option>
+              </select>
+            </div>
+            <button type="button" class="btn btn-sm" id="custom-css-add-btn" style="border: 1px solid var(--slate-300); background-color: var(--slate-100);">Add CSS</button>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <!-- <main class="main">
+      <div class="droppable-container">
+        <div class="droppable-overlay"></div>
+        <div class="droppable"></div>
+      </div>
+    </main> -->
+    <main class="main">
+      <div class="droppable-overlay"></div>
+      <div class="quill-editor-container">
+        <div id="quill-editor">
+        </div>
+      </div>
+      <div class="droppable"></div>
+    </main>
+  </section>
+</body>
+
+</html>
